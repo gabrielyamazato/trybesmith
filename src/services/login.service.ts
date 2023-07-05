@@ -15,7 +15,7 @@ async function loginVerify(login: Login): Promise<Token> {
   const user = await UserModel.findOne({ where: { username: login.username } });
 
   if (!user || !bcrypt.compareSync(login.password, user.dataValues.password)) {
-    return { token: 'FAILED' }
+    return { token: 'FAILED' };
   }
 
   const { username } = user.dataValues;
@@ -23,9 +23,9 @@ async function loginVerify(login: Login): Promise<Token> {
   const token = Utils.generateToken({ username });
 
   return {
-    token: token
-  }
-};
+    token,
+  };
+}
 
 export default {
   loginVerify,
